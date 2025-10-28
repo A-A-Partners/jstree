@@ -780,6 +780,21 @@
 						e.preventDefault();
 						if(e.currentTarget !== document.activeElement) { $(e.currentTarget).trigger('focus'); }
 						this.activate_node(e.currentTarget, e);
+
+						// In case the selection of the root element is disabled,
+				        // each click on the root element will toggle its open/close state.
+				        // For example: in the collection basket page.
+				        if (this.settings.disableRootSelection) {
+				            if (this._data.core.last_clicked && this._data.core.last_clicked.parent === "#") {
+				              this.toggle_node(e.target);
+				            }
+				        }
+
+
+
+
+
+					
 					}.bind(this))
 				.on('keydown.jstree', '.jstree-anchor', function (e) {
 						if(e.target.tagName && e.target.tagName.toLowerCase() === "input") { return true; }
